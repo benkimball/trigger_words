@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+$:<<'lib'
+require 'token_analyzer'
+require 'benchmark'
+
+if ARGV.length < 1
+  puts "Usage: #{__FILE__} context_file.txt"
+  exit 1
+end
+
+file = ARGF
+tokens = []
+
+# measure running time
+time_sec = Benchmark.realtime do |m|
+  tokens = TokenAnalyzer.new(file).top_n(100)
+end
+
+# output
+tokens.each do |(token, idf)|
+  puts "%-16s%f" % [token, idf]
+end
+puts "  completed in #{time_sec} seconds"
