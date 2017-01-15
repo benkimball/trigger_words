@@ -60,7 +60,6 @@ class TokenAnalyzerTest < Test::Unit::TestCase
     # cribbed from MiniTest
     def assert_in_delta exp, act, delta = 0.001, msg = nil
       n = (exp - act).abs
-      msg = message(msg) { "Expected #{exp} - #{act} (#{n}) to be < #{delta}" }
-      assert delta >= n, msg
-    end      
+      assert delta >= n, "Expected #{exp} - #{act} (#{n}) to be < #{delta}."
+    end
 end
